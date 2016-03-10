@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright (C) 2013 tarent AG
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining
+  ~ a copy of this software and associated documentation files (the
+  ~ "Software"), to deal in the Software without restriction, including
+  ~ without limitation the rights to use, copy, modify, merge, publish,
+  ~ distribute, sublicense, and/or sell copies of the Software, and to
+  ~ permit persons to whom the Software is furnished to do so, subject to
+  ~ the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be
+  ~ included in all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  ~ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  ~ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+  ~ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  ~ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  ~ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<dataset>
+    <osiam_client internal_id="100003" id="example-client" redirect_uri="http://localhost:5000/oauth2"
+                  client_secret="secret"
+                  access_token_validity_seconds="2342" refresh_token_validity_seconds="2342" validity_in_seconds="1337"
+                  implicit_approval="false"/>
+    <osiam_client_grants id="100003" grants="authorization_code"/>
+    <osiam_client_grants id="100003" grants="refresh_token"/>
+    <osiam_client_grants id="100003" grants="password"/>
+    <osiam_client_grants id="100003" grants="client_credentials"/>
+    <osiam_client_scopes id="100003" scope="ADMIN"/>
+
+    <scim_meta id="100004" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+    <scim_meta id="100091" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+    <scim_meta id="100092" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+    <scim_meta id="100093" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+    <scim_meta id="100094" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+
+    <scim_meta id="100095" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+    <scim_meta id="100096" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+    <scim_meta id="100097" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+    <scim_meta id="100098" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+
+    <scim_meta id="100080" created="2013-07-31 21:43:18.0" last_modified="2013-07-31 21:43:18.0" resource_type="Group"/>
+    <scim_meta id="100081" created="2013-07-31 21:43:18.0" last_modified="2013-07-31 21:43:18.0" resource_type="Group"/>
+    <scim_meta id="100082" created="2013-07-31 21:43:18.0" last_modified="2013-07-31 21:43:18.0" resource_type="Group"/>
+    <scim_meta id="100083" created="2013-07-31 21:43:18.0" last_modified="2013-07-31 21:43:18.0" resource_type="Group"/>
+
+    <scim_id internal_id="100001" meta="100004" id="cef9452e-00a9-4cec-a086-d171374ffbef"/>
+    <scim_id internal_id="10004" meta="100091" id="cef9482e-00a9-4cec-a086-d171374ffbef"/>
+    <scim_id internal_id="10005" meta="100092" id="cef9852e-00a9-4cec-a086-d171374ffbef"/>
+    <scim_id internal_id="10006" meta="100093" id="cef9452e-08a9-4cec-a086-d171374ffbef"/>
+    <scim_id internal_id="10007" meta="100094" id="cef9452e-00a9-4cec-a886-d171374ffbef"/>
+
+    <scim_id internal_id="10008" meta="100095" id="cef2452e-00a9-4cec-a886-d171374ffbef"/>
+    <scim_id internal_id="10009" meta="100096" id="cef9452e-00a2-4cec-a886-d171374ffbef"/>
+    <scim_id internal_id="100010" meta="100097" id="cef9452e-00a9-4cec-a826-d171374ffbef"/>
+    <scim_id internal_id="100011" meta="100098" id="cef9452e-00a9-4cec-a826-d151374ffbef"/>
+
+    <scim_id internal_id="100052" meta="100080" id="69e1a5dc-89be-4343-956c-b5541af249f4"/>
+    <scim_id internal_id="1005" meta="100081" id="69e1a5dc-89be-4543-976c-b5541af249f4"/>
+    <scim_id internal_id="1006" meta="100082" id="65e1a5dc-89be-4343-976c-b5541af249f4"/>
+    <scim_id internal_id="1007" meta="100083" id="69e1a5dc-89be-4343-976c-b5541af549f4"/>
+
+    <scim_user
+            password="$2a$13$ak2lJewo1QbbGZV9SPZ9euQRwnedbHQp5QjVfceXQPnEo5w5bzJuy"
+            user_name="george0" internal_id="10004" active="true"/>
+
+    <scim_user
+            password="$2a$13$u1OCInqeFR6wUGX3R4YG3O.xhZmMXPNExxdpVn6dizWKxXrf5wGOi"
+            user_name="george1" internal_id="10005" active="false"/>
+
+    <scim_user
+            password="$2a$13$J520p0jOUCe5xGduqs72o.7UKO1vj0n..AY6H8W.Y6EWKR6IDwHtW"
+            user_name="george2" internal_id="10006" active="true"/>
+
+    <scim_user
+            password="$2a$13$vsQl4W/R72q1MaQ5vGbarORLyWSwTdIKlWOYfvtoEQs6jYaX4infa"
+            user_name="george3" internal_id="10007" active="false"/>
+
+    <scim_user
+            password="$2a$13$y6.i05uTGFcGbATL7EDqaeWUvuJH6bArBl/dbT2Ut8dOrrvJPG2fC"
+            user_name="george4" internal_id="10008" active="false"/>
+
+    <scim_user
+            password="$2a$13$7LedinCGcSMSCAqNy0aAguMRLtWjCDOZf2JyjMdu38b1XjHv5FYyC"
+            user_name="george5" internal_id="10009" active="false"/>
+
+    <scim_user
+            password="$2a$13$36eh.Al1G.2OA8Q3Bm10cuIzAZ3JO1ZkUtyEhwpFBOjxg7.RPTcUK"
+            user_name="george6" internal_id="100010" active="false"/>
+
+    <scim_user
+            password="$2a$13$yQBLhkXDHud2jQjAQ8a/FuNiSbMcUgVXNj6Sekrx7JN88TdK75Lly"
+            user_name="george &quot;alexander&quot;" internal_id="100011" active="false"/>
+
+    <scim_user
+            password="$2a$13$CfkpeagYWq4kIuugqj/xCOi5LuI864wTuFShXvRFWHbSni1Rcgw/a"
+            user_name="marissa" internal_id="100001" active="true"/>
+
+    <scim_group display_name="test" internal_id="100052"/>
+    <scim_group display_name="student" internal_id="1005"/>
+    <scim_group display_name="noob" internal_id="1006"/>
+    <scim_group display_name="alumni" internal_id="1007"/>
+
+    <scim_group_members groups="100052" members="10004"/>
+    <scim_group_members groups="100052" members="10005"/>
+    <scim_group_members groups="1005" members="10006"/>
+    <scim_group_members groups="1006" members="10006"/>
+    <scim_group_members groups="1007" members="10007"/>
+
+    <scim_group_members groups="1007" members="10008"/>
+    <scim_group_members groups="1007" members="10009"/>
+
+    <scim_email multi_value_id="1000100" value="jj@tt.de" is_primary="false" type="work"
+                user_internal_id="10008"/>
+    <scim_email multi_value_id="1000101" value="bb@ss.de" is_primary="false" type="work"
+                user_internal_id="10009"/>
+    <scim_email multi_value_id="1000102" value="oo@aa.de" is_primary="false" type="work"
+                user_internal_id="100010"/>
+
+</dataset>

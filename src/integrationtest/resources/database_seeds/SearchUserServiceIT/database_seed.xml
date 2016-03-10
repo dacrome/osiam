@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright (C) 2013 tarent AG
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining
+  ~ a copy of this software and associated documentation files (the
+  ~ "Software"), to deal in the Software without restriction, including
+  ~ without limitation the rights to use, copy, modify, merge, publish,
+  ~ distribute, sublicense, and/or sell copies of the Software, and to
+  ~ permit persons to whom the Software is furnished to do so, subject to
+  ~ the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be
+  ~ included in all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  ~ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  ~ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+  ~ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  ~ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  ~ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<dataset>
+    <osiam_client internal_id="100003" id="example-client" redirect_uri="http://localhost:5000/oauth2"
+                  client_secret="secret"
+                  access_token_validity_seconds="2342" refresh_token_validity_seconds="2342" validity_in_seconds="1337"
+                  implicit_approval="false" />
+    <osiam_client_grants id="100003" grants="authorization_code"/>
+    <osiam_client_grants id="100003" grants="refresh_token"/>
+    <osiam_client_grants id="100003" grants="password"/>
+    <osiam_client_grants id="100003" grants="client_credentials"/>
+    <osiam_client_scopes id="100003" scope="ADMIN"/>
+
+    <osiam_client internal_id="100080" id="short-living-client" redirect_uri="http://localhost:5001/oauth2"
+                  client_secret="other-secret"
+                  access_token_validity_seconds="1" refresh_token_validity_seconds="1" validity_in_seconds="1"
+                  implicit_approval="false" />
+    <osiam_client_grants id="100080" grants="authorization_code"/>
+    <osiam_client_grants id="100080" grants="refresh_token"/>
+    <osiam_client_grants id="100080" grants="password"/>
+    <osiam_client_grants id="100080" grants="client_credentials"/>
+    <osiam_client_scopes id="100080" scope="ADMIN"/>
+
+    <scim_meta id="100004" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+    <scim_meta id="100006" created="2013-08-08 19:45:20.816" last_modified="2013-08-08 19:45:20.816"
+               resource_type="User"/>
+    <scim_meta id="100010" created="2013-08-08 19:45:37.407" last_modified="2013-08-08 19:45:37.407"
+               resource_type="User"/>
+    <scim_meta id="100014" created="2013-08-08 19:45:47.18" last_modified="2013-08-08 19:45:47.18" resource_type="User"/>
+    <scim_meta id="100022" created="2013-08-08 19:46:12.738" last_modified="2013-08-08 19:46:12.738"
+               resource_type="User"/>
+    <scim_meta id="100026" created="2013-08-08 19:46:20.638" last_modified="2013-08-08 19:46:20.638"
+               resource_type="User"/>
+    <scim_meta id="100030" created="2013-08-08 19:46:26.798" last_modified="2013-08-08 19:46:26.798"
+               resource_type="User"/>
+    <scim_meta id="100034" created="2013-08-08 19:47:26.151" last_modified="2013-08-08 19:47:26.151"
+               resource_type="User"/>
+    <scim_meta id="100043" created="2013-08-08 19:47:51.781" last_modified="2013-08-08 19:47:51.781"
+               resource_type="User"/>
+    <scim_meta id="100047" created="2013-08-08 19:51:34.498" last_modified="2013-08-08 19:51:34.498"
+               resource_type="User"/>
+    <scim_meta id="100050" created="2013-08-08 19:53:43.221" last_modified="2013-08-08 19:53:43.221"
+               resource_type="User"/>
+    <scim_meta id="100053" created="2013-07-31 21:43:18.0" last_modified="2013-07-31 21:43:18.0" resource_type="Group"/>
+    <scim_meta id="100055" created="2013-08-08 19:59:54.612" last_modified="2013-08-08 19:59:54.612"
+               resource_type="Group"/>
+    <scim_meta id="100057" created="2013-08-08 19:59:56.681" last_modified="2013-08-08 19:59:56.681"
+               resource_type="Group"/>
+    <scim_meta id="100059" created="2013-08-08 19:59:59.191" last_modified="2013-08-08 19:59:59.191"
+               resource_type="Group"/>
+    <scim_meta id="100061" created="2013-08-08 20:00:01.532" last_modified="2013-08-08 20:00:01.532"
+               resource_type="Group"/>
+    <scim_meta id="100063" created="2013-08-08 20:00:03.577" last_modified="2013-08-08 20:00:03.577"
+               resource_type="Group"/>
+    <scim_meta id="100065" created="2013-08-08 20:00:07.333" last_modified="2013-08-08 20:00:07.333"
+               resource_type="Group"/>
+    <scim_meta id="100069" created="2013-08-08 20:01:31.049" last_modified="2013-08-08 20:01:31.049"
+               resource_type="Group"/>
+    <scim_meta id="100071" created="2013-08-08 20:01:55.84" last_modified="2013-08-08 20:01:55.84" resource_type="Group"/>
+    <scim_meta id="100073" created="2013-08-08 20:02:18.462" last_modified="2013-08-08 20:02:18.462"
+               resource_type="Group"/>
+
+    <scim_id internal_id="100005" external_id="bthomson" meta="100006" id="618b398c-0110-43f2-95df-d1bc4e7d2b4a"/>
+    <scim_id internal_id="100009" external_id="adavies" meta="100010" id="03dc8f50-acaa-44d6-9401-bdfc5e10e821"/>
+    <scim_id internal_id="100013" external_id="cmiller" meta="100014" id="ac3bacc9-915d-4bab-9145-9eb600d5e5bf"/>
+    <scim_id internal_id="100021" external_id="dcooper" meta="100022" id="d6f323e2-c717-4ab6-af9c-e639b50a948c"/>
+    <scim_id internal_id="100025" external_id="epalmer" meta="100026" id="db566580-08a7-44fa-be0f-d30f1c0ff2df"/>
+    <scim_id internal_id="100029" external_id="gbarker" meta="100030" id="df4ca43d-2811-4ade-aed9-75a1ba990dac"/>
+    <scim_id internal_id="100033" external_id="hsimpson" meta="100034" id="7d33bcbe-a54c-43d8-867e-f6146164941e"/>
+    <scim_id internal_id="100042" external_id="kmorris" meta="100043" id="aba67300-74f1-4e51-a68a-0a6c5c45b79c"/>
+    <scim_id internal_id="100046" external_id="bjensen" meta="100047" id="834b410a-943b-4c80-817a-4465aed037bc"/>
+    <scim_id internal_id="100049" external_id="ewilley" meta="100050" id="781d9891-9114-4cd5-813a-77c3f4b0e15f"/>
+    <scim_id internal_id="100001" meta="100004" id="cef9452e-00a9-4cec-a086-d171374ffbef"/>
+    <scim_id internal_id="100052" meta="100053" id="69e1a5dc-89be-4343-976c-b5541af249f4"/>
+    <scim_id internal_id="100054" meta="100055" id="d30a77eb-d7cf-4cd1-9fb3-cc640ef09578"/>
+    <scim_id internal_id="100056" meta="100057" id="0cb908cf-81a9-4966-803f-a3eb92968bb4"/>
+    <scim_id internal_id="100058" meta="100059" id="4969930d-103a-4c34-8ecc-1f0966f4e3a6"/>
+    <scim_id internal_id="100060" meta="100061" id="7c198d82-f03b-4fa8-806c-16b26172bba5"/>
+    <scim_id internal_id="100062" meta="100063" id="1f838739-51cf-4cf1-99d5-0804d6bd41c2"/>
+    <scim_id internal_id="100064" meta="100065" id="f8b4294a-84fd-4f99-b1f8-a4949fc25254"/>
+    <scim_id internal_id="100068" meta="100069" id="2b6f5db7-a51a-4620-b8df-1ed267ec6f48"/>
+    <scim_id internal_id="100070" meta="100071" id="b2687732-c6f5-4bce-9e7a-e9e3e9db8918"/>
+    <scim_id internal_id="100072" meta="100073" id="d38393bb-5743-4067-88f2-d386bd68cc4b"/>
+
+    <scim_name id="100007" family_name="Thompson" formatted="Ms. Beccy Thompson" given_name="Beccy"/>
+    <scim_name id="100011" family_name="Davies" formatted="Ms. Adeline Davies" given_name="Adeline"/>
+    <scim_name id="100015" family_name="Carolina" formatted="Ms. Carolina Miller" given_name="Miller"/>
+    <scim_name id="100023" family_name="Cooper" formatted="Mr. Daniel Cooper" given_name="Daniel"/>
+    <scim_name id="100027" family_name="Palmer" formatted="Mr. Emil Palmer" given_name="Emil"/>
+    <scim_name id="100031" family_name="Barker" formatted="Mr. Gregg Barker" given_name="Gregg"/>
+    <scim_name id="100035" family_name="Simpson" formatted="Mr. Homer Simpson" given_name="Homer"/>
+    <scim_name id="100044" family_name="Morris" formatted="Mr. Kenny Morris" given_name="Kenny"/>
+    <scim_name id="100048" family_name="Jensen" formatted="Ms. Barbara J Jensen III" given_name="Barbara"/>
+    <scim_name id="100051" family_name="Erick" formatted="Erick Willey" given_name="Willey"/>
+
+    <scim_user
+            password="$2a$13$rp6AHpE.te/tn9jHnZ/yxeFxGYHjI/NTqLr6lDYG0vfMEyvAui5vG"
+            display_name="BarbaraJ." locale="de" nick_name="Barbara" preferred_language="de"
+            profile_url="http://babaraJ.com" timezone="UTC" title="Dr."
+            user_name="bjensen" user_type="user" internal_id="100046" name="100048" active="false"/>
+    <scim_user display_name="BeccyT." locale="de" nick_name="Beccy"
+               password="$2a$13$f2.MuL0j1tHc0LWXXSqbOuVKTzs1hlo6862PIpSF8cJ0aTjQmqrae"
+               title="Dr." user_name="jcambell" internal_id="100005" name="100007" active="false"/>
+    <scim_user display_name="AdelineD." locale="de" nick_name="Adeline"
+               password="$2a$13$f2.MuL0j1tHc0LWXXSqbOuVKTzs1hlo6862PIpSF8cJ0aTjQmqrae"
+               title="Prof." user_name="adavies" internal_id="100009" name="100011" active="false"/>
+    <scim_user display_name="CarolinaM." locale="de" nick_name="Carolina"
+               password="$2a$13$3cPk7tjUJlvznrRFFLmQq.BnmJ9te/oLjEL1wmCK.Y5SjWN9P57E6"
+               user_name="cmiller" internal_id="100013" name="100015" active="false"/>
+    <scim_user display_name="DanielC." locale="de" nick_name="Daniel"
+               password="$2a$13$gx./SbTXFmDQPSepI9VyQeatCammNHABwf6UYiOnQqvCD3V9aAMoi"
+               title="" user_name="dcooper" internal_id="100021" name="100023" active="false"/>
+    <scim_user display_name="EmilP." locale="de" nick_name="Emil"
+               password="$2a$13$XBwE0QC1F7Mi8Uy7NXU1kuHNDUcqKxzwbar7nqoQHWDTyuzqra4Lm"
+               title="" user_name="epalmer" internal_id="100025" name="100027" active="false"/>
+    <scim_user display_name="GreggB." locale="de" nick_name="Gregg"
+               password="$2a$13$DAVXMv9qe9rTZAOn5ZtX2u9QBRHsctdXPRmsd9XF1wwYqx8qMkDiC"
+               title="" user_name="gparker" internal_id="100029" name="100031" active="false"/>
+    <scim_user display_name="HomerS." locale="us" nick_name="Homer"
+               password="$2a$13$BqLbFGSnhj0uJ3l8wo2mnO7rWO7xulbdRJfcJpadgDRtkpm2d.sVG"
+               title="King" user_name="hsimpson" internal_id="100033" name="100035" active="true"/>
+    <scim_user display_name="KennyM." locale="de" nick_name="Kenny"
+               password="$2a$13$bY.cc6BG5NZeaiM9QH0pzO0xbCnavklTH.efOe1AdWyIi5KziTKUe"
+               title="Dr." user_name="kmorris" internal_id="100042" name="100044" active="false"/>
+    <scim_user
+            password="$2a$13$02tsv/EpcvDF6q29kLL2we5wBoObKjSQcDUJa0DxGPn/wnIkZ.fpu"
+            user_name="ewilley" internal_id="100049" name="100051" active="false"/>
+    <scim_user
+            password="$2a$13$CfkpeagYWq4kIuugqj/xCOi5LuI864wTuFShXvRFWHbSni1Rcgw/a"
+            user_name="marissa" internal_id="100001" active="true"/>
+
+    <scim_group display_name="test_group01" internal_id="100052"/>
+    <scim_group display_name="test_group02" internal_id="100054"/>
+    <scim_group display_name="test_group03" internal_id="100056"/>
+    <scim_group display_name="test_group04" internal_id="100058"/>
+    <scim_group display_name="test_group05" internal_id="100060"/>
+    <scim_group display_name="test_group06" internal_id="100062"/>
+    <scim_group display_name="test_group08" internal_id="100064"/>
+    <scim_group display_name="test_group07" internal_id="100068"/>
+    <scim_group display_name="test_group09" internal_id="100070"/>
+    <scim_group display_name="test_group10" internal_id="100072"/>
+
+    <scim_group_members groups="100052" members="100046"/>
+
+    <scim_email multi_value_id="100091" value="adavies@example.com" is_primary="false" type="work"
+                user_internal_id="100009"/>
+    <scim_email multi_value_id="100092" value="bjensen@example.com" is_primary="false" type="work"
+                user_internal_id="100046"/>
+    <scim_email multi_value_id="100093" value="bthomson@example.com" is_primary="false"
+                type="work"
+                user_internal_id="100005"/>
+    <scim_email multi_value_id="100094" value="cmiller@example.com" is_primary="false" type="work"
+                user_internal_id="100013"/>
+    <scim_email multi_value_id="100095" value="dcooper@example.com" is_primary="false" type="work"
+                user_internal_id="100021"/>
+    <scim_email multi_value_id="100096" value="epalmer@example.com" is_primary="false" type="work"
+                user_internal_id="100025"/>
+    <scim_email multi_value_id="100097" value="ewilley@example.com" is_primary="false" type="work"
+                user_internal_id="100049"/>
+    <scim_email multi_value_id="100098" value="gbarker@example.com" is_primary="false" type="work"
+                user_internal_id="100029"/>
+    <scim_email multi_value_id="100099" value="hsimpson@atom-example.com" is_primary="false"
+                type="work"
+                user_internal_id="100033"/>
+    <scim_email multi_value_id="100100" value="hsimpson@phome-example.com" is_primary="false"
+                type="home" user_internal_id="100033"/>
+    <scim_email multi_value_id="100101" value="kmorris@example.com" is_primary="false" type="work"
+                user_internal_id="100042"/>
+
+    <scim_address multi_value_id="100008" country="Germany" locality="Germany" postal_code="66222"
+                  is_primary="false" region="Germany" street_address="example street 62"
+                  type="work" user_internal_id="100005" />
+    <scim_address multi_value_id="100012" country="Germany" locality="Germany" postal_code="66333"
+                  is_primary="false" region="Germany" street_address="example street 63"
+                  type="work" user_internal_id="100009" />
+    <scim_address multi_value_id="100016" country="Germany" locality="Germany" postal_code="6644"
+                  is_primary="false" region="Germany" street_address="example street 64"
+                  type="work" user_internal_id="100013" />
+    <scim_address multi_value_id="100024" country="Germany" locality="Germany" postal_code="66666"
+                  is_primary="false" region="Germany" street_address="example street 66"
+                  type="work" user_internal_id="100021" />
+    <scim_address multi_value_id="100028" country="Germany" locality="Germany" postal_code="66777"
+                  is_primary="false" region="Germany" street_address="example street 67"
+                  type="work" user_internal_id="100025" />
+    <scim_address multi_value_id="100032" country="Germany" locality="Germany" postal_code="66888"
+                  is_primary="false" region="Germany" street_address="example street 68"
+                  type="work" user_internal_id="100029" />
+    <scim_address multi_value_id="100036" country="USA" locality="USA" postal_code="4567" is_primary="false"
+                  region="Springfield" street_address="742 Evergreen" type="home" user_internal_id="100033" />
+    <scim_address multi_value_id="100037" country="USA" locality="USA" postal_code="1245" is_primary="false"
+                  region="Springfield" street_address="Walnut Street - Moes" type="work" user_internal_id="100033" />
+    <scim_address multi_value_id="100045" country="Germany" locality="Germany" postal_code="66111"
+                  is_primary="false" region="Germany" street_address="example street 60"
+                  type="work" user_internal_id="100042" />
+
+    <scim_photo multi_value_id="100102" value="http://example.com/barbara.jpg" type="photo" user_internal_id="100046"/>
+
+    <scim_im multi_value_id="100103" value="barbara" type="xmpp" user_internal_id="100046"/>
+
+    <scim_phonenumber multi_value_id="100104" value="555-555-8377" type="work" user_internal_id="100046"/>
+    <scim_phonenumber multi_value_id="100105" value="555-555-8399" type="work" user_internal_id="100049"/>
+    <scim_phonenumber multi_value_id="100106" value="600-555-8377" type="work" user_internal_id="100042"/>
+    <scim_phonenumber multi_value_id="100107" value="622-555-8377" type="work" user_internal_id="100005"/>
+    <scim_phonenumber multi_value_id="100108" value="633-555-8377" type="work" user_internal_id="100009"/>
+    <scim_phonenumber multi_value_id="100109" value="644-555-8377" type="work" user_internal_id="100013"/>
+    <scim_phonenumber multi_value_id="100110" value="655-111-8377" type="work" user_internal_id="100033"/>
+    <scim_phonenumber multi_value_id="100111" value="655-222-8377" type="home" user_internal_id="100033"/>
+    <scim_phonenumber multi_value_id="100112" value="666-555-8377" type="work" user_internal_id="100021"/>
+    <scim_phonenumber multi_value_id="100113" value="677-555-8377" type="work" user_internal_id="100025"/>
+    <scim_phonenumber multi_value_id="100114" value="688-555-8377" type="work" user_internal_id="100029"/>
+
+    <scim_extension internal_id="100081" urn="extension"/>
+    <scim_extension_field internal_id="100082" required="true" name="gender" type="STRING"
+                          extension="100081"/>
+    <scim_extension_field internal_id="100083" required="false" name="size" type="STRING"
+                          extension="100081"/>
+    <scim_extension_field internal_id="100084" required="true" name="birth" type="STRING"
+                          extension="100081"/>
+    <scim_extension_field internal_id="100085" required="true" name="newsletter" type="STRING"
+                          extension="100081"/>
+    <scim_extension_field internal_id="100086" required="false" name="married" type="STRING"
+                          extension="100081"/>
+</dataset>

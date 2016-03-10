@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright (C) 2013 tarent AG
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining
+  ~ a copy of this software and associated documentation files (the
+  ~ "Software"), to deal in the Software without restriction, including
+  ~ without limitation the rights to use, copy, modify, merge, publish,
+  ~ distribute, sublicense, and/or sell copies of the Software, and to
+  ~ permit persons to whom the Software is furnished to do so, subject to
+  ~ the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be
+  ~ included in all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  ~ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  ~ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+  ~ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  ~ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  ~ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<dataset>
+    <osiam_client internal_id="100003" id="example-client" redirect_uri="http://localhost:5000/oauth2"
+                  client_secret="secret"
+                  access_token_validity_seconds="2342" refresh_token_validity_seconds="2342" validity_in_seconds="1337"
+                  implicit_approval="false"/>
+    <osiam_client_grants id="100003" grants="authorization_code"/>
+    <osiam_client_grants id="100003" grants="refresh_token"/>
+    <osiam_client_grants id="100003" grants="password"/>
+    <osiam_client_grants id="100003" grants="client_credentials"/>
+    <osiam_client_scopes id="100003" scope="ADMIN"/>
+
+    <scim_meta id="100004" created="2011-10-10 00:00:00.0" last_modified="2011-10-10 00:00:00.0" resource_type="User"/>
+    <scim_meta id="100047" created="2013-08-08 19:51:34.498" last_modified="2013-08-08 19:51:34.498"
+               resource_type="User"/>
+    <scim_meta id="100055" created="2013-08-08 19:59:54.612" last_modified="2013-08-08 19:59:54.612"
+               resource_type="Group"/>
+    <scim_meta id="100057" created="2013-08-08 19:59:56.681" last_modified="2013-08-08 19:59:56.681"
+               resource_type="Group"/>
+
+    <scim_id internal_id="100001" meta="100004" id="cef9452e-00a9-4cec-a086-d171374ffbef"/>
+    <scim_id internal_id="100054" meta="100055" id="d30a77eb-d7cf-4cd1-9fb3-cc640ef09578"/>
+    <scim_id internal_id="100056" meta="100057" id="0cb908cf-81a9-4966-803f-a3eb92968bb4"/>
+
+    <scim_user
+            password="$2a$13$CfkpeagYWq4kIuugqj/xCOi5LuI864wTuFShXvRFWHbSni1Rcgw/a"
+            user_name="marissa" internal_id="100001" active="true"/>
+
+    <scim_group display_name="empty_group" internal_id="100054"/>
+    <scim_group display_name="test_group03" internal_id="100056"/>
+
+</dataset>
