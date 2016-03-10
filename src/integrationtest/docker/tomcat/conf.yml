@@ -24,7 +24,7 @@
 
 packaging:
   add:
-    - target/dependency/osiam.war
+    - target/osiam.war
 
 links:
   - ${database.container}
@@ -37,7 +37,7 @@ ports:
 healthChecks:
   pings:
     - url: ${osiam.test.host}/manager/text/list
-      timeout: 250000
+      timeout: 100000
       pattern: osiam:running
 
-tag: ${project.artifactId}_tomcat-${database.container}
+tag: ${project.artifactId}_integration-tests_tomcat_${database.container}

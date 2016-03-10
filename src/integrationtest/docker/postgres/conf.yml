@@ -24,3 +24,5 @@
 
 ports:
   - 15432 5432
+
+tag: ${project.artifactId}_integration-tests_tomcat-${database.container}

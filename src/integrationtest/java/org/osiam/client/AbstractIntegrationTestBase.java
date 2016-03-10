@@ -23,6 +23,7 @@
  */
 package org.osiam.client;
 
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.RequestEntityProcessing;
@@ -64,6 +65,8 @@ public abstract class AbstractIntegrationTestBase {
     static {
         OsiamConnector.setConnectTimeout(Integer.parseInt(System.getProperty("connector.timeout", "-1")));
         OsiamConnector.setReadTimeout(Integer.parseInt(System.getProperty("connector.timeout", "-1")));
+
+        OsiamConnector.objectMapper.setFilterProvider(new SimpleFilterProvider().setFailOnUnknownId(false));
     }
 
     protected AccessToken accessToken;

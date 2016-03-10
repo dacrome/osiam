@@ -34,9 +34,9 @@ osiam:
     #
     vendor: postgresql
     driver: org.postgresql.Driver
-    url: jdbc:postgresql://postgres:5432/ong
-    username: ong
-    password: b4s3dg0d
+    url: jdbc:postgresql://postgres:5432/osiam
+    username: osiam
+    password: osiam
 
   #
   # LDAP configuration

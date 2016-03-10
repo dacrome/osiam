@@ -23,6 +23,7 @@
  */
 package org.osiam.test.integration
 
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider
 import org.dbunit.database.DatabaseDataSourceConnection
 import org.dbunit.database.IDatabaseConnection
 import org.dbunit.dataset.IDataSet
@@ -61,6 +62,8 @@ abstract class AbstractIT extends Specification {
                 .setClientId(CLIENT_ID)
                 .setClientSecret(CLIENT_SECRET)
                 .build()
+
+        OsiamConnector.objectMapper.setFilterProvider(new SimpleFilterProvider().setFailOnUnknownId(false));
     }
 
     def setupDatabase(String seedFileName) {

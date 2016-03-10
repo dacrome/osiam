@@ -117,3 +117,5 @@ buildNumber.properties
 
 # OSIAM dev
 .osiam/
+
+integration-tests.properties

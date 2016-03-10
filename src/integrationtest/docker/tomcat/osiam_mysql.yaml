@@ -34,9 +34,9 @@ osiam:
     #
     vendor: mysql
     driver: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/ong
-    username: ong
-    password: b4s3dg0d
+    url: jdbc:mysql://mysql:3306/osiam
+    username: osiam
+    password: osiam
 
   #
   # LDAP configuration

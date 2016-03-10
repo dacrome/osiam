@@ -97,6 +97,22 @@
         <java.version>1.8</java.version>
         <start-class>org.osiam.Osiam</start-class>
 
+        <docker.host>http://localhost:2375</docker.host>
+        <docker.removeIntermediateImages>true</docker.removeIntermediateImages>
+
+        <osiam.host.protocol>http</osiam.host.protocol>
+        <osiam.host>localhost</osiam.host>
+        <osiam.port>8180</osiam.port>
+        <osiam.test.host>${osiam.host.protocol}://${osiam.host}:${osiam.port}</osiam.test.host>
+
+        <osiam.database.host>${osiam.host}</osiam.database.host>
+
+        <connector.timeout>10000</connector.timeout>
+        <debug.pre.command.tomcat/>
+
+        <version.docker-maven-plugin>2.10.6</version.docker-maven-plugin>
+        <version.osiam.connector4java>1.9-SNAPSHOT</version.osiam.connector4java>
+
         <sonar.core.codeCoveragePlugin>cobertura</sonar.core.codeCoveragePlugin>
         <!-- force sonar to reuse reports generated during build cycle -->
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -117,6 +133,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -225,6 +247,20 @@
             <artifactId>spring-security-ldap</artifactId>
         </dependency>
 
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>org.osiam</groupId>
+            <artifactId>connector4java</artifactId>
+            <version>${version.osiam.connector4java}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
@@ -253,12 +289,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Testing JSON -->
         <dependency>
             <groupId>com.jayway.restassured</groupId>
@@ -280,6 +310,65 @@
             <version>1.7.7</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.4.9</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.springtestdbunit</groupId>
+            <artifactId>spring-test-dbunit</artifactId>
+            <version>1.2.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.22.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.22.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy.modules.http-builder</groupId>
+            <artifactId>http-builder</artifactId>
+            <version>0.7.1</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>groovy</artifactId>
+                    <groupId>org.codehaus.groovy</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -300,6 +389,14 @@
     </repositories>
 
     <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>src/integrationtest/resources</directory>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -345,6 +442,7 @@
                         <exclude>jpmInstall.sh</exclude>
                         <exclude>**/*.md</exclude>
                         <exclude>bootstrap.min.css</exclude>
+                        <exclude>**/*.ldif</exclude>
                     </excludes>
                     <mapping>
                         <g4>JAVADOC_STYLE</g4>
@@ -385,6 +483,27 @@
                         <version>2.9.2-01</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.10</version>
+                <executions>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/integrationtest/groovy</source>
+                                <source>src/integrationtest/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -503,27 +622,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Build Helper: will add Groovy sources to path -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.10</version>
-                <executions>
-                    <execution>
-                        <id>add-test-source</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>add-test-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${basedir}/src/test/groovy</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -593,6 +691,120 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <trimStackTrace>false</trimStackTrace>
+                    <systemPropertyVariables>
+                        <osiam.host>${osiam.host}</osiam.host>
+                        <osiam.test.host>${osiam.test.host}</osiam.test.host>
+                    </systemPropertyVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-properties</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <fileSets>
+                                <fileSet>
+                                    <sourceFile>
+                                        src/integrationtest/resources/integration-tests_${database.container}.properties
+                                    </sourceFile>
+                                    <destinationFile>
+                                        src/integrationtest/resources/integration-tests.properties
+                                    </destinationFile>
+                                </fileSet>
+                            </fileSets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.alexecollins.docker</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${version.docker-maven-plugin}</version>
+                <configuration>
+                    <src>src/integrationtest/docker</src>
+                    <version>1.16</version>
+                    <host>${docker.host}</host>
+                    <exclude>${excluded.container}</exclude>
+                    <removeIntermediateImages>${docker.removeIntermediateImages}</removeIntermediateImages>
+                    <cache>false</cache>
+                    <permissionErrorTolerant>true</permissionErrorTolerant>
+                    <quiet>true</quiet>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>clean-docker-images</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>start-docker-container</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop-docker-container</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>postgres</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <database.container>postgres</database.container>
+                <excluded.container>mysql</excluded.container>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>mysql</id>
+            <properties>
+                <database.container>mysql</database.container>
+                <excluded.container>postgres</excluded.container>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>debug</id>
+            <properties>
+                <debug.pre.command.tomcat>"jpda",</debug.pre.command.tomcat>
+            </properties>
+        </profile>
+    </profiles>
 </project>
