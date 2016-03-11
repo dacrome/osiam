@@ -53,8 +53,7 @@ please consider doing the following:
 * Rebase your feature branch onto origin/master before raising the PR.
 * Be descriptive in your PR and commit messages. What is it for, why is it
   needed and how you implemented it.
-* Make sure the [integration tests]
-  (https://github.com/osiam/connector4java-integration-tests) pass.
+* Make sure the [integration tests](docs/integration-tests.md) pass.
 * Please squash related commits.
 * Please make sure that your pull request adheres to our [coding conventions]
   (#coding-conventions).

@@ -24,6 +24,7 @@ This is the central place for the OSIAM documentation. We have several types of 
 * [More about OSIAM Connectors](osiam-connectors.md)
 
 ## Misc
+* [Integration tests](docs/integration-tests.md)
 * [How to develop new OSIAM connectors](osiam-connectors.md#externally-built-osiam-connectors)
 * [Secure Development Lifecycle for OSIAM](secure-dev-lifecycle.md)
 * [Stress testing OSIAM](https://github.com/osiam/test-suites/blob/master/stress-tests/README.md)
