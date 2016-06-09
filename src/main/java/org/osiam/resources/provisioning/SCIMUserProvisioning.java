@@ -26,7 +26,6 @@ package org.osiam.resources.provisioning;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.osiam.resources.converter.UserConverter;
 import org.osiam.resources.exception.ResourceExistsException;
-import org.osiam.resources.provisioning.update.UserUpdater;
 import org.osiam.resources.scim.SCIMSearchResult;
 import org.osiam.resources.scim.User;
 import org.osiam.storage.dao.SearchResult;
@@ -49,17 +48,14 @@ public class SCIMUserProvisioning implements SCIMProvisioning<User> {
     private final UserConverter userConverter;
     private final UserDao userDao;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final UserUpdater userUpdater;
 
     @Autowired
     public SCIMUserProvisioning(UserConverter userConverter,
                                 UserDao userDao,
-                                BCryptPasswordEncoder bCryptPasswordEncoder,
-                                UserUpdater userUpdater) {
+                                BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userConverter = userConverter;
         this.userDao = userDao;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userUpdater = userUpdater;
     }
 
     @Override
@@ -153,28 +149,6 @@ public class SCIMUserProvisioning implements SCIMProvisioning<User> {
         }
 
         return new SCIMSearchResult<>(users, result.totalResults, count, startIndex);
-    }
-
-    @Override
-    public User update(String id, User user) {
-        UserEntity userEntity = userDao.getById(id);
-
-        if (userDao.isUserNameAlreadyTaken(user.getUserName(), id)) {
-            throw new ResourceExistsException(String.format(
-                    "Can't update the user with the id \"%s\". The username \"%s\" is already taken.", id,
-                    user.getUserName()));
-        }
-        if (userDao.isExternalIdAlreadyTaken(user.getExternalId(), id)) {
-            throw new ResourceExistsException(String.format(
-                    "Can't update the user with the id \"%s\". The externalId \"%s\" is already taken.", id,
-                    user.getExternalId()));
-        }
-
-        userUpdater.update(user, userEntity);
-
-        userEntity.touch();
-
-        return removePassword(userConverter.toScim(userEntity));
     }
 
     @Override

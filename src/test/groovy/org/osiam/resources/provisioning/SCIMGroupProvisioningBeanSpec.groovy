@@ -26,7 +26,6 @@ package org.osiam.resources.provisioning
 import org.osiam.resources.converter.GroupConverter
 import org.osiam.resources.exception.ResourceExistsException
 import org.osiam.resources.exception.ResourceNotFoundException
-import org.osiam.resources.provisioning.update.GroupUpdater
 import org.osiam.resources.scim.Group
 import org.osiam.resources.scim.MemberRef
 import org.osiam.storage.dao.GroupDao
@@ -34,15 +33,12 @@ import org.osiam.storage.dao.SearchResult
 import org.osiam.storage.entities.GroupEntity
 import spock.lang.Specification
 
-import javax.persistence.NoResultException
-
 class SCIMGroupProvisioningBeanSpec extends Specification {
 
     def groupDao = Mock(GroupDao)
     def groupConverter = Mock(GroupConverter)
-    def groupUpdater = Mock(GroupUpdater)
 
-    def scimGroupProvisioning = new SCIMGroupProvisioning(groupConverter, groupDao, groupUpdater)
+    def scimGroupProvisioning = new SCIMGroupProvisioning(groupConverter, groupDao)
 
     Group group = new Group.Builder().build()
     GroupEntity groupEntity = Mock(GroupEntity)
@@ -190,18 +186,5 @@ class SCIMGroupProvisioningBeanSpec extends Specification {
         result.startIndex == 1
         result.itemsPerPage == 100
         result.totalResults == 1000.toLong()
-    }
-
-    def 'updating a group retrieves the entity, updates it and converts it back to scim'() {
-        given:
-
-        when:
-        scimGroupProvisioning.update(groupUuid, group)
-
-        then:
-        1 * groupDao.getById(groupUuid) >> groupEntity
-        1 * groupUpdater.update(group, groupEntity)
-        1 * groupEntity.touch()
-        1 * groupConverter.toScim(groupEntity)
     }
 }

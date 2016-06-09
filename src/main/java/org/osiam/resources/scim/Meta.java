@@ -240,7 +240,7 @@ public final class Meta implements Serializable {
 
         /**
          * Will set created to given value and lastModified to System.currentTime Only be used by the server. Will be
-         * ignored by PUT and PATCH operations
+         * ignored by PUT operations
          */
         public Builder(Date created, Date lastModified) {
             this.created = created != null ? new Date(created.getTime()) : null;

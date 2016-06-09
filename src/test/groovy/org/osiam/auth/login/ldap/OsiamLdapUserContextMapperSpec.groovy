@@ -148,7 +148,7 @@ class OsiamLdapUserContextMapperSpec extends Specification {
         User user = new User.Builder('userNameValue').build()
 
         when:
-        user = osiamLdapUserContextMapper.mapUpdateUser(user, userData).scimConformUpdateUser
+        user = osiamLdapUserContextMapper.mapUser(user, userData).scimConformUpdateUser
 
         then:
         userDataIsCorrectlyMapped(user)

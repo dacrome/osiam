@@ -70,6 +70,6 @@ public class ScimToLdapAttributeMapping {
         }
         OsiamLdapUserContextMapper contextMapper = new OsiamLdapUserContextMapper(this);
         User user = contextMapper.mapUser(ldapUserData);
-        contextMapper.mapUpdateUser(user, ldapUserData);
+        contextMapper.mapUser(user, ldapUserData);
     }
 }

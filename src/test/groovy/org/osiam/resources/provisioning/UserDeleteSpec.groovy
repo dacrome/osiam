@@ -38,7 +38,7 @@ class UserDeleteSpec extends Specification {
     def userDao = Mock(UserDao)
     def userConverter = Mock(UserConverter)
 
-    SCIMUserProvisioning scimUserProvisioning = new SCIMUserProvisioning(userConverter, userDao, bCryptPasswordEncoder, null)
+    SCIMUserProvisioning scimUserProvisioning = new SCIMUserProvisioning(userConverter, userDao, bCryptPasswordEncoder)
 
     def uuidAsString = UUID.randomUUID().toString()
 

@@ -26,7 +26,6 @@ package org.osiam.resources.provisioning;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.osiam.resources.converter.GroupConverter;
 import org.osiam.resources.exception.ResourceExistsException;
-import org.osiam.resources.provisioning.update.GroupUpdater;
 import org.osiam.resources.scim.Group;
 import org.osiam.resources.scim.SCIMSearchResult;
 import org.osiam.storage.dao.GroupDao;
@@ -45,13 +44,11 @@ public class SCIMGroupProvisioning implements SCIMProvisioning<Group> {
 
     private final GroupConverter groupConverter;
     private final GroupDao groupDao;
-    private final GroupUpdater groupUpdater;
 
     @Autowired
-    public SCIMGroupProvisioning(GroupConverter groupConverter, GroupDao groupDao, GroupUpdater groupUpdater) {
+    public SCIMGroupProvisioning(GroupConverter groupConverter, GroupDao groupDao) {
         this.groupConverter = groupConverter;
         this.groupDao = groupDao;
-        this.groupUpdater = groupUpdater;
     }
 
     @Override
@@ -120,25 +117,6 @@ public class SCIMGroupProvisioning implements SCIMProvisioning<Group> {
     @Override
     public long count() {
         return groupDao.count();
-    }
-
-    @Override
-    public Group update(String id, Group group) {
-        if (groupDao.isDisplayNameAlreadyTaken(group.getDisplayName(), id)) {
-            throw new ResourceExistsException(String.format("Can't update the group with the id \"" + id
-                    + "\". The displayname \"%s\" is already taken.", group.getDisplayName()));
-        }
-        if (groupDao.isExternalIdAlreadyTaken(group.getExternalId(), id)) {
-            throw new ResourceExistsException(String.format("Can't update the group with the id \"" + id
-                    + "\". The externalId \"%s\" is already taken.", group.getExternalId()));
-        }
-        GroupEntity groupEntity = groupDao.getById(id);
-
-        groupUpdater.update(group, groupEntity);
-
-        groupEntity.touch();
-
-        return groupConverter.toScim(groupEntity);
     }
 
     @Override

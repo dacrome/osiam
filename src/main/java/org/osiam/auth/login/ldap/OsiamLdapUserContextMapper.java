@@ -36,7 +36,6 @@ import org.osiam.resources.scim.Name;
 import org.osiam.resources.scim.PhoneNumber;
 import org.osiam.resources.scim.Photo;
 import org.osiam.resources.scim.Role;
-import org.osiam.resources.scim.UpdateUser;
 import org.osiam.resources.scim.User;
 import org.osiam.resources.scim.X509Certificate;
 import org.springframework.ldap.core.DirContextOperations;
@@ -176,9 +175,9 @@ public class OsiamLdapUserContextMapper extends LdapUserDetailsMapper {
         return builder.build();
     }
 
-    public UpdateUser mapUpdateUser(User user, DirContextOperations ldapUserData) {
+    public User mapUser(User user, DirContextOperations ldapUserData) {
 
-        UpdateUser.Builder updateBuilder = new UpdateUser.Builder();
+        User.Builder userBuilder = new User.Builder(user);
 
         for (String scimAttribute : scimLdapAttributes.scimAttributes()) {
             String ldapValue = ldapUserData.getStringAttribute(scimLdapAttributes.toLdapAttribute(scimAttribute));
@@ -191,52 +190,52 @@ public class OsiamLdapUserContextMapper extends LdapUserDetailsMapper {
             case "userName":
                 break;
             case "displayName":
-                updateBuilder.updateDisplayName(ldapValue);
+                userBuilder.setDisplayName(ldapValue);
                 break;
             case "email":
-                updateEmail(updateBuilder, user.getEmails(), ldapValue);
+                updateEmail(userBuilder, user.getEmails(), ldapValue);
                 break;
             case "entitlement":
-                updateEntitlement(updateBuilder, user.getEntitlements(), ldapValue);
+                updateEntitlement(userBuilder, user.getEntitlements(), ldapValue);
                 break;
             case "externalId":
-                updateBuilder.updateExternalId(ldapValue);
+                userBuilder.setExternalId(ldapValue);
                 break;
             case "im":
-                updateIm(updateBuilder, user.getIms(), ldapValue);
+                updateIm(userBuilder, user.getIms(), ldapValue);
                 break;
             case "locale":
-                updateBuilder.updateLocale(ldapValue);
+                userBuilder.setLocale(ldapValue);
                 break;
             case "nickName":
-                updateBuilder.updateNickName(ldapValue);
+                userBuilder.setNickName(ldapValue);
                 break;
             case "phoneNumber":
-                updatePhoneNumber(updateBuilder, user.getPhoneNumbers(), ldapValue);
+                updatePhoneNumber(userBuilder, user.getPhoneNumbers(), ldapValue);
                 break;
             case "photo":
-                updatePhoto(updateBuilder, user.getPhotos(), ldapValue, scimAttribute);
+                updatePhoto(userBuilder, user.getPhotos(), ldapValue, scimAttribute);
                 break;
             case "preferredLanguage":
-                updateBuilder.updatePreferredLanguage(ldapValue);
+                userBuilder.setPreferredLanguage(ldapValue);
                 break;
             case "profileUrl":
-                updateBuilder.updateProfileUrl(ldapValue);
+                userBuilder.setProfileUrl(ldapValue);
                 break;
             case "role":
-                updateRole(updateBuilder, user.getRoles(), ldapValue);
+                updateRole(userBuilder, user.getRoles(), ldapValue);
                 break;
             case "timezone":
-                updateBuilder.updateTimezone(ldapValue);
+                userBuilder.setTimezone(ldapValue);
                 break;
             case "title":
-                updateBuilder.updateTitle(ldapValue);
+                userBuilder.setTitle(ldapValue);
                 break;
             case "userType":
-                updateBuilder.updateUserType(ldapValue);
+                userBuilder.setUserType(ldapValue);
                 break;
             case "x509Certificate":
-                updateX509Certificate(updateBuilder, user.getX509Certificates(), ldapValue);
+                updateX509Certificate(userBuilder, user.getX509Certificates(), ldapValue);
                 break;
             default:
                 if (!scimAttribute.startsWith("address.") && !scimAttribute.startsWith("name.")) {
@@ -245,10 +244,10 @@ public class OsiamLdapUserContextMapper extends LdapUserDetailsMapper {
             }
         }
 
-        updateAddress(updateBuilder, user.getAddresses(), ldapUserData);
-        updateName(updateBuilder, ldapUserData);
+        updateAddress(userBuilder, user.getAddresses(), ldapUserData);
+        updateName(user.getName(), userBuilder, ldapUserData);
 
-        return updateBuilder.build();
+        return userBuilder.build();
     }
 
     private LdapConfigurationException createAttributeNotRecognizedException(String scimAttribute){
@@ -256,11 +255,11 @@ public class OsiamLdapUserContextMapper extends LdapUserDetailsMapper {
                 + "' could not be recognized as scim attribute.");
     }
 
-    private void updateName(UpdateUser.Builder updateBuilder, DirContextOperations ldapUserData) {
-        updateBuilder.updateName(getName(ldapUserData));
+    private void updateName(Name name, User.Builder userBuilder, DirContextOperations ldapUserData) {
+        userBuilder.setName(getName(ldapUserData));
     }
 
-    private void updateAddress(UpdateUser.Builder updateBuilder, List<Address> addresses,
+    private void updateAddress(User.Builder updateBuilder, List<Address> addresses,
             DirContextOperations ldapUserData) {
         for (Address address : addresses) {
             if (address.getType() != null && address.getType().toString().equals(LdapAuthentication.LDAP_PROVIDER)) {
@@ -407,43 +406,57 @@ public class OsiamLdapUserContextMapper extends LdapUserDetailsMapper {
     }
 
     private Name getName(DirContextOperations ldapUserData) {
-        Name name = null;
-        Name.Builder builder = new Name.Builder();
         boolean nameFound = false;
 
+        Name.Builder builder = mapName(ldapUserData, new Name.Builder());
+
+        if (nameFound) {
+            return builder.build();
+        }
+        return null;
+    }
+
+    private Name getName(DirContextOperations ldapUserData, Name name) {
+        Name.Builder builder = new Name.Builder()
+                .setFamilyName(name.getFamilyName())
+                .setFormatted(name.getFormatted())
+                .setGivenName(name.getGivenName())
+                .setHonorificPrefix(name.getHonorificPrefix())
+                .setHonorificSuffix(name.getHonorificSuffix())
+                .setMiddleName(name.getMiddleName());
+
+        return mapName(ldapUserData, builder).build();
+    }
+
+    private Name.Builder mapName(DirContextOperations ldapUserData, Name.Builder nameBuilder) {
         for (String scimAttribute : scimLdapAttributes.scimAttributes()) {
             String ldapValue = ldapUserData.getStringAttribute(scimLdapAttributes.toLdapAttribute(scimAttribute));
             if (!scimAttribute.startsWith("name.")) {
                 continue;
             }
-            nameFound = true;
             switch (scimAttribute) {
-            case "name.familyName":
-                builder.setFamilyName(ldapValue);
-                break;
-            case "name.formatted":
-                builder.setFormatted(ldapValue);
-                break;
-            case "name.givenName":
-                builder.setGivenName(ldapValue);
-                break;
-            case "name.honorificPrefix":
-                builder.setHonorificPrefix(ldapValue);
-                break;
-            case "name.honorificSuffix":
-                builder.setHonorificSuffix(ldapValue);
-                break;
-            case "name.middleName":
-                builder.setMiddleName(ldapValue);
-                break;
-            default:
-                throw createAttributeNotRecognizedException(scimAttribute);
+                case "name.familyName":
+                    nameBuilder.setFamilyName(ldapValue);
+                    break;
+                case "name.formatted":
+                    nameBuilder.setFormatted(ldapValue);
+                    break;
+                case "name.givenName":
+                    nameBuilder.setGivenName(ldapValue);
+                    break;
+                case "name.honorificPrefix":
+                    nameBuilder.setHonorificPrefix(ldapValue);
+                    break;
+                case "name.honorificSuffix":
+                    nameBuilder.setHonorificSuffix(ldapValue);
+                    break;
+                case "name.middleName":
+                    nameBuilder.setMiddleName(ldapValue);
+                    break;
+                default:
+                    throw createAttributeNotRecognizedException(scimAttribute);
             }
         }
-
-        if (nameFound) {
-            name = builder.build();
-        }
-        return name;
+        return nameBuilder;
     }
 }

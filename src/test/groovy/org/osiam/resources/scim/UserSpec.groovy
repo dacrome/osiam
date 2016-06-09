@@ -43,7 +43,7 @@ class UserSpec extends Specification {
         user.schemas == CORE_SCHEMA_SET
     }
 
-    def 'should be possible to create an user without name for PATCH'() {
+    def 'should be possible to create an user without name'() {
         when:
         def user = new User.Builder().build()
         then:

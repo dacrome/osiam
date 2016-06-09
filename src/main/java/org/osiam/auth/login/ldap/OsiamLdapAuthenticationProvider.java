@@ -145,9 +145,7 @@ public class OsiamLdapAuthenticationProvider extends LdapAuthenticationProvider 
         if (user == null) {
             return userProvisioning.create(osiamLdapUserContextMapper.mapUser(ldapUserData));
         } else if (syncUserData) {
-            return userProvisioning.update(
-                    user.getId(), osiamLdapUserContextMapper.mapUpdateUser(user, ldapUserData)
-                            .getScimConformUpdateUser());
+            return userProvisioning.replace(user.getId(), osiamLdapUserContextMapper.mapUser(user, ldapUserData));
         }
 
         return user;

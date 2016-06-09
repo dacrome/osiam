@@ -72,19 +72,6 @@ public interface SCIMProvisioning<T extends Resource> {
     T replace(String id, T resource);
 
     /**
-     * This method updates an resource, it is used for PATCH calls.
-     *
-     * @param id
-     *            , the external identifier of an resource
-     * @param resource
-     *            , an resource representation which should be created
-     * @return the updated resource
-     * @throws org.osiam.resources.exception.ResourceNotFoundException
-     *             if no resource with the given id got found
-     */
-    T update(String id, T resource);
-
-    /**
      * This method deletes an user found by its id, it is used for DELETE calls.
      *
      * @param id

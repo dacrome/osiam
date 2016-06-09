@@ -278,9 +278,6 @@ public abstract class MultiValuedAttribute implements Serializable {
 
         /**
          * Sets the operation (See {@link MultiValuedAttribute#getOperation()}).
-         * <p>
-         * Will be automatically set by the {@link UpdateUser}
-         * </p>
          *
          * @param operation only "delete" is supported at the moment
          * @return the builder itself
