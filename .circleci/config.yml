@@ -1,0 +1,78 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/osiam
+
+    docker:
+      - image: circleci/openjdk:8
+
+    steps:
+      - checkout
+      - run: |
+          curl -L https://github.com/codacy/codacy-coverage-reporter/releases/download/1.0.13/codacy-coverage-reporter-1.0.13-assembly.jar -o codacy-coverage-reporter.jar
+          ./gradlew dependencies
+
+  test:
+    working_directory: ~/osiam
+    steps:
+      - run: |
+          test -z ${CIRCLE_TAG} && ./gradlew check || ./gradlew -Pversion=${CIRCLE_TAG} check
+          mkdir -p $CIRCLE_TEST_REPORTS/junit/
+          find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+          cp -r build/reports/jacoco/ $CIRCLE_ARTIFACTS
+          test -z $CODACY_PROJECT_TOKEN || java -cp codacy-coverage-reporter.jar com.codacy.CodacyCoverageReporter -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+          test -z $COVERALLS_REPO_TOKEN || ./gradlew coveralls
+      - store_test_results:
+          path: reports
+
+  deploy:
+    working_directory: ~/osiam
+
+    steps:
+      - run: ./gradlew assemble publish
+      - run: curl -X POST https://circleci.com/api/v1/project/osiam/connector4java-integration-tests/tree/master?circle-token=$CIRCLE_TOKEN
+      - run: curl -H "Content-Type: application/json" --data '{"source_type": "Branch", "source_name": "master"}' -X POST https://registry.hub.docker.com/u/osiamorg/osiam/trigger/${DOCKER_HUB_TRIGGER_TOKEN}/
+
+  release:
+    working_directory: ~/osiam
+
+    steps:
+      - deploy:
+          name: Bintray
+          command: ./gradlew -Pversion=${CIRCLE_TAG} assemble publish
+      - deploy: ./gradlew -Pversion=${CIRCLE_TAG} bintrayUpload
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
+  deployment:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            branch:
+              only:
+                - master
+  release:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
+      - release:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /.*/
